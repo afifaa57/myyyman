@@ -1,0 +1,261 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Vintage romantic scrapbook design system.
+ * Cream paper, dusty rose, muted burgundy, dark brown ink.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-blush: var(--blush);
+  --color-rose: var(--rose);
+  --color-burgundy: var(--burgundy);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-gold: var(--gold);
+  --color-night: var(--night);
+
+  --font-serif-display: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Great Vibes", cursive;
+  --font-hand: "Caveat", cursive;
+  --font-sans: "Cormorant Garamond", Georgia, serif;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  --paper: oklch(0.963 0.019 85);
+  --paper-deep: oklch(0.925 0.028 80);
+  --blush: oklch(0.874 0.049 18);
+  --rose: oklch(0.72 0.105 14);
+  --burgundy: oklch(0.42 0.108 14);
+  --ink: oklch(0.325 0.041 45);
+  --ink-soft: oklch(0.5 0.032 45);
+  --gold: oklch(0.78 0.09 75);
+  --night: oklch(0.16 0.018 30);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(0.985 0.012 85);
+  --card-foreground: var(--ink);
+  --popover: var(--card);
+  --popover-foreground: var(--ink);
+  --primary: var(--burgundy);
+  --primary-foreground: oklch(0.98 0.01 85);
+  --secondary: var(--blush);
+  --secondary-foreground: var(--burgundy);
+  --muted: var(--paper-deep);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--blush);
+  --accent-foreground: var(--burgundy);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.98 0.01 85);
+  --border: oklch(0.86 0.026 70);
+  --input: oklch(0.86 0.026 70);
+  --ring: var(--rose);
+
+  --shadow-paper: 0 1px 2px oklch(0.32 0.04 45 / 0.12), 0 10px 24px -12px oklch(0.32 0.04 45 / 0.35);
+  --shadow-lift: 0 18px 40px -14px oklch(0.32 0.04 45 / 0.5);
+  --gradient-cream: linear-gradient(
+    160deg,
+    oklch(0.978 0.014 90) 0%,
+    oklch(0.955 0.022 82) 55%,
+    oklch(0.925 0.03 74) 100%
+  );
+  --gradient-rose: linear-gradient(135deg, var(--rose), var(--burgundy));
+}
+
+.dark {
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-serif-display);
+  }
+
+  button {
+    touch-action: manipulation;
+  }
+}
+
+/* ---------- textures & scrapbook utilities ---------- */
+
+@utility paper-grain {
+  position: relative;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(oklch(0.32 0.04 45 / 0.07) 0.5px, transparent 0.6px),
+      radial-gradient(oklch(0.32 0.04 45 / 0.05) 0.5px, transparent 0.6px);
+    background-size:
+      3px 3px,
+      7px 7px;
+    background-position:
+      0 0,
+      2px 3px;
+  }
+}
+
+@utility film-grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0.16;
+    background-image:
+      radial-gradient(oklch(1 0 0 / 0.5) 0.5px, transparent 0.6px),
+      radial-gradient(oklch(0 0 0 / 0.5) 0.5px, transparent 0.6px);
+    background-size:
+      3px 3px,
+      4px 4px;
+  }
+}
+
+@utility paper-sheet {
+  background: var(--gradient-cream);
+  box-shadow: var(--shadow-paper);
+  border: 1px solid oklch(0.87 0.028 72 / 0.9);
+}
+
+@utility torn-bottom {
+  -webkit-mask-image: radial-gradient(6px 6px at 6px -1px, transparent 6px, #000 6.5px);
+  mask-image: radial-gradient(6px 6px at 6px -1px, transparent 6px, #000 6.5px);
+  -webkit-mask-size: 12px 100%;
+  mask-size: 12px 100%;
+  -webkit-mask-position: bottom;
+  mask-position: bottom;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+}
+
+@utility scene-stage {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@utility ink-underline {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    oklch(0.72 0.105 14 / 0.55),
+    transparent
+  );
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+}
+
+@keyframes drift-up {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-120px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@utility animate-sway {
+  animation: sway 6s ease-in-out infinite;
+}
+
+@utility animate-breathe {
+  animation: breathe 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
